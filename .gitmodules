@@ -1,0 +1,6 @@
+[submodule "simulator"]
+	path = simulator
+	url = https://github.com/dittonetwork/simulator
+[submodule "indexer"]
+	path = indexer
+	url = https://github.com/dittonetwork/indexer
