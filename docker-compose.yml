@@ -10,7 +10,6 @@ services:
       - .env
     environment:
       - MONGO_URI=mongodb://mongo:27017/?replicaSet=rs0
-      - DB_NAME=indexer
 
   indexer:
     build:
@@ -23,7 +22,6 @@ services:
       - .env
     environment:
       - MONGO_URI=mongodb://mongo:27017/?replicaSet=rs0
-      - DB_NAME=indexer
 
   mongo:
     image: mongo:latest
