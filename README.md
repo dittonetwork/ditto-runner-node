@@ -42,7 +42,11 @@ The setup process is simplified using the provided `Makefile`.
     cp env.example .env
     ```
 
-    You must provide values for `RPC_URL_11155111`, `ZERODEV_API_KEY`, and `EXECUTOR_PRIVATE_KEY` to run the application.
+    You must provide values for `RPC_URL_<CHAIN_ID>`, `ZERODEV_API_KEY`, and `EXECUTOR_PRIVATE_KEY` to run the application.
+
+    The currently available chain_ids are:
+    - Sepolia (chain_id: 11155111)
+    - Base (chain_id: 8453)
 
 3.  **Run the setup command:**
 
