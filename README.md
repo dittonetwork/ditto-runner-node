@@ -14,6 +14,11 @@ The project relies on two git submodules:
 -   `indexer/`: Contains the source code for the indexer service.
 -   `simulator/`: Contains the source code for the simulator service, including the Ditto Workflow SDK.
 
+## Whitelisting for Reporting
+
+Before running the node, the operator must join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide their public key. This step is necessary to enable operations and reporting.
+Failure to complete this step will prevent the node from functioning properly in the live environment.
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
