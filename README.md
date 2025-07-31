@@ -16,7 +16,7 @@ The project relies on two git submodules:
 
 ## Whitelisting for Reporting
 
-Before running the node, the operator must join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide their public key. This step is necessary to enable operations and reporting.
+Before running the node, the operator must join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide their address. This step is necessary to enable operations and reporting.
 Failure to complete this step will prevent the node from functioning properly in the live environment.
 
 ## Prerequisites
