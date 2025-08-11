@@ -13,13 +13,12 @@ services:
       - DB_NAME=indexer
       - MAX_WORKERS=1
       - RUNNER_NODE_SLEEP=60
-      - FULL_NODE=false
+      - FULL_NODE=true
       - MAX_MISSING_NEXT_SIM_LIMIT=100
       - MAX_BLOCK_RANGE_11155111=10000
       - MAX_BLOCK_RANGE_1=2000
-      - CHAIN_ID=11155111
       - IPFS_SERVICE_URL=https://ipfs-service.develop.dittonetwork.io
-      - WORKFLOW_CONTRACT_ADDRESS=0x5CE5E78588F4dC8556E2c607134e8b76567AECE6
+      - IS_PROD=true
       - LOG_LEVEL=info
       - LOG_PRETTY=true 
 

@@ -72,18 +72,16 @@ This service executes and manages workflows.
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `MONGO_URI`                   | **Required.** The connection string for the MongoDB instance.                                                                            |
 | `DB_NAME`                     | **Required.** The name of the database the simulator will use.                                                                           |
-| `RPC_URL`                     | **Required.** The primary RPC endpoint for the Sepolia blockchain.                                              |
-| `DEFAULT_RPC_URL_SEPOLIA`     | **Required.** A zerodev RPC URL for the Sepolia.                                                                                 |
+| `EXECUTOR_PRIVATE_KEY`        | **CRITICAL.** The private key for the account that executes and pays for transactions. **Never commit a real key to version control.**     |
+| `RPC_URL_<CHAIN_ID>`          | **Required.** RPC endpoints for the supported blockchains. At least one is required. Example: `RPC_URL_11155111` for Sepolia.               |
+| `ZERODEV_API_KEY`             | **Required.** API key for ZeroDev for sponsoring transactions.                                                                             |
+| `IPFS_SERVICE_URL`            | **Required.** The URL for the IPFS service used to store and retrieve workflow data.                                                     |
 | `MAX_WORKERS`                 | The maximum number of concurrent workers for processing jobs.                                                                            |
 | `RUNNER_NODE_SLEEP`           | The sleep interval in seconds for the main runner loop.                                                                                  |
 | `FULL_NODE`                   | A boolean flag (`true`/`false`) to determine if the node should run in "full" mode, potentially enabling more features or checks.         |
 | `MAX_MISSING_NEXT_SIM_LIMIT`  | The threshold for how many consecutive times a workflow simulation can be missed before it's flagged.                                    |
-| `MAX_BLOCK_RANGE_11155111`    | The maximum number of blocks to scan at once on the Sepolia network (chain ID 11155111).                                                  |
-| `MAX_BLOCK_RANGE_1`           | The maximum number of blocks to scan at once on the Ethereum Mainnet (chain ID 1).                                                       |
-| `EXECUTOR_PRIVATE_KEY`        | **CRITICAL.** The private key for the account that executes and pays for transactions. **Never commit a real key to version control.**     |
-| `CHAIN_ID`                    | **Required.** The chain ID of the target network (e.g., `11155111` for Sepolia).                                                          |
-| `IPFS_SERVICE_URL`            | **Required.** The URL for the IPFS service used to store and retrieve workflow data.                                                     |
-| `WORKFLOW_CONTRACT_ADDRESS`   | **Required.** The deployed address of the master Ditto Workflow contract.                                                                |
+| `MAX_BLOCK_RANGE_<CHAIN_ID>`  | The maximum number of blocks to scan at once on a given network, e.g., `MAX_BLOCK_RANGE_11155111` for Sepolia.                            |
+| `IS_PROD`                     | A boolean flag (`true`/`false`) to indicate if the environment is production.                                                          |
 | `LOG_LEVEL`                   | The verbosity of the application logs (e.g., `info`, `debug`, `error`).                                                                  |
 | `LOG_PRETTY`                  | A boolean flag (`true`/`false`) to enable human-readable, colorized log output.                                                          |
 
@@ -97,7 +95,7 @@ This service listens for on-chain events and indexes them for fast querying.
 | `DB_NAME`                   | **Required.** The name of the database the indexer will use.                                            |
 | `META_FILLER_SLEEP`         | The sleep interval in seconds for the metadata filler worker, which enriches indexed data.              |
 | `IPFS_CONNECTOR_ENDPOINT`   | **Required.** The IPFS endpoint used to fetch metadata for indexed items.                               |
-| `RPC_11155111`              | **Required.** The RPC endpoint for the Sepolia network (chain ID 11155111). This is specific to the chain being indexed. |
+| `RPC_URL_<CHAIN_ID>`        | **Required.** RPC endpoints for the supported blockchains, used for fetching on-chain data. Example: `RPC_URL_11155111` for Sepolia. |
 
 ## Troubleshooting
 
@@ -110,7 +108,7 @@ Here are some common issues and how to resolve them:
 
 -   **Errors related to RPC or IPFS in logs:**
     -   The public RPC and IPFS endpoints provided in the default configuration may be rate-limited or temporarily unavailable.
-    -   **Solution:** Replace the `RPC_URL`, `DEFAULT_RPC_URL_SEPOLIA`, and `IPFS_SERVICE_URL` values in `docker-compose.yml` with your own private or alternative public endpoints (e.g., from Infura, Alchemy, or QuickNode).
+    -   **Solution:** Replace the `RPC_URL_<CHAIN_ID>` and `IPFS_SERVICE_URL` values in your `.env` file (or `docker-compose.yml`) with your own private or alternative public endpoints (e.g., from Infura, Alchemy, or QuickNode).
 
 -   **`mongo-init` service fails:**
     -   The `mongo-init` service is responsible for initializing the MongoDB replica set. It can sometimes fail due to timing issues.
