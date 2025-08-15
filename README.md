@@ -24,7 +24,7 @@ The setup process is simplified using the provided `Makefile`.
 
 ### 1. Whitelisting for Reporting
 
-Before running the node, the operator must join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide their address. This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
+Before running the node, the operator must join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide their simulator and operator address. Simulator address is the public key of the EOA that operator will use to sign the reports, the operator address is the address that has the delegated stake on symbiotic. This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
 
 ### 2. Configure Environment Variables
 
