@@ -21,6 +21,7 @@ services:
       - IS_PROD=true
       - LOG_LEVEL=info
       - LOG_PRETTY=true 
+      - EXECUTOR_ADDRESS=0xF177179963aA0EDE80Be4396d04d970171CF6a36
 
   indexer:
     build:
