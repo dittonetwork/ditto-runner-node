@@ -13,7 +13,7 @@ services:
       - DB_NAME=indexer
       - MAX_WORKERS=1
       - RUNNER_NODE_SLEEP=60
-      - FULL_NODE=true
+      - FULL_NODE=false
       - MAX_MISSING_NEXT_SIM_LIMIT=100
       - MAX_BLOCK_RANGE_11155111=10000
       - MAX_BLOCK_RANGE_1=2000
