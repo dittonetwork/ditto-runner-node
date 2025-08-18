@@ -17,7 +17,7 @@ services:
       - MAX_MISSING_NEXT_SIM_LIMIT=100
       - MAX_BLOCK_RANGE_11155111=10000
       - MAX_BLOCK_RANGE_1=2000
-      - IPFS_SERVICE_URL=https://ipfs-service.develop.dittonetwork.io
+      - IPFS_SERVICE_URL=https://ipfs-service.dittonetwork.io
       - IS_PROD=true
       - LOG_LEVEL=info
       - LOG_PRETTY=true 
