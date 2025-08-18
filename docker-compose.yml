@@ -36,7 +36,8 @@ services:
       - MONGO_URI=mongodb://mongo:27017/?replicaSet=rs0
       - DB_NAME=indexer
       - META_FILLER_SLEEP=2
-      - IPFS_CONNECTOR_ENDPOINT=https://ipfs-service.develop.dittonetwork.io/ipfs/read
+      - IPFS_CONNECTOR_ENDPOINT=https://ipfs-service.dittonetwork.io/ipfs/read
+      - ENV=prod
 
   mongo:
     image: mongo:latest
