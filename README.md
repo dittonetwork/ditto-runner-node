@@ -19,12 +19,15 @@ Before you begin, ensure you have the following installed on your system:
 -   [Make](https://www.gnu.org/software/make/) (optional, but recommended for using the provided commands)
 
 ## Getting Started
-
+Dito : PROD 
+     indexer + simulator(executor) + ipfs service + drn
+     
+others: indexer + simulator(no executor)
 The setup process is simplified using the provided `Makefile`.
 
 ### 1. Whitelisting for Reporting
 
-Before running the node, the operator must join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide their simulator and operator address. Simulator address is the public key of the EOA that operator will use to sign the reports, the operator address is the address that has the delegated stake on symbiotic. This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
+Before running the node, each operator has to be whitelisted. Please join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide your simulator and operator addresses in the following [google form](https://forms.gle/iQcGKtY7wq66Dnxg6). Simulator address is the public key of the EOA that operator will use to sign the reports, the operator address is the address that has the delegated stake on symbiotic. This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
 
 ### 2. Configure Environment Variables
 
