@@ -10,7 +10,7 @@ The project consists of two main services, orchestrated by `docker-compose.yml`:
 -   **`indexer`**: Indexes data from the blockchain to provide a queryable API for the frontend and other services.
 
 ## Prerequisites
-
+We recommend to spin up ec2-like instance with characteristics not less than: aws [t3a.medium](https://costcalc.cloudoptimo.com/aws-pricing-calculator/ec2/t3a.medium) + 20gb storage.
 Before you begin, ensure you have the following installed on your system:
 
 -   [Docker](https://docs.docker.com/get-docker/)
