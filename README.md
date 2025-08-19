@@ -10,7 +10,16 @@ The project consists of two main services, orchestrated by `docker-compose.yml`:
 -   **`indexer`**: Indexes data from the blockchain to provide a queryable API for the frontend and other services.
 
 ## Prerequisites
-We recommend to spin up ec2-like instance with characteristics not less than: aws [t3a.medium](https://costcalc.cloudoptimo.com/aws-pricing-calculator/ec2/t3a.medium) + 20gb storage.
+### Hardware 
+
+To ensure stable performance, we recommend running the software on an instance with at least the following specifications:
+
+Instance type: Equivalent to AWS [t3a.medium](https://costcalc.cloudoptimo.com/aws-pricing-calculator/ec2/t3a.medium) (2 vCPUs, 4 GB RAM)
+Storage: 20 GB or more (SSD recommended)
+
+We have successfully tested the software on an AWS t3a.medium instance with 20 GB storage.
+
+### Software 
 Before you begin, ensure you have the following installed on your system:
 
 -   [Docker](https://docs.docker.com/get-docker/)
