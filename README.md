@@ -58,7 +58,7 @@ ZERODEV_API_KEY=...
 
 -   `EXECUTOR_PRIVATE_KEY`: The private key of the wallet that will execute transactions.
 -   `RPC_URL_<CHAIN_ID>`: RPC endpoints for the supported blockchains.
--   `ZERODEV_API_KEY`: Your API key from ZeroDev, used for UserOperation simulations and executions.
+-   `ZERODEV_API_KEY`: Your API key from [ZeroDev](https://dashboard.zerodev.app), used for UserOperation simulations and executions.
 
 ### 3. Clone the Repository
 
