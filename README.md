@@ -27,7 +27,11 @@ The setup process is simplified using the provided `Makefile`.
 
 ### 1. Whitelisting for Reporting
 
-Before running the node, each operator has to be whitelisted. Please join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide your simulator and operator addresses in the following [google form](https://forms.gle/iQcGKtY7wq66Dnxg6). Simulator address is the public key of the EOA that operator will use to sign the reports, the operator address is the address that has the delegated stake on symbiotic. This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
+Before running the node, each operator has to be whitelisted. Please join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide your simulator and operator addresses in the following [google form](https://forms.gle/iQcGKtY7wq66Dnxg6). 
+- Simulator address: This is the public key of the EOA the operator will use to sign reports. Please generate a new key for this purpose and do not use your real operator key during the Alpha phase.
+- Operator address: This is the address that holds the delegated stake on Symbiotic. Only the public key should be shared—never provide your private key in the Ditto runner node during the Alpha phase.
+
+This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
 
 ### 2. Configure Environment Variables
 
