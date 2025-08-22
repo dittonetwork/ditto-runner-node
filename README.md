@@ -7,7 +7,7 @@ This repository contains the backend services for the Ditto Network, including t
 During the Alpha phase, operators will be rewarded based on their performance in simulations. Points are distributed retrospectively and will become visible after the Alpha phase concludes.
 
 - Reward Mechanism:
-A public leaderboard available at https://app.dittonetwork.io/operators tracks the percentage of successful simulations per operator. Each day at 00:00 UTC, we take a snapshot of the leaderboard. The top-5 operators by success rate receive a fixed reward in points.
+A public leaderboard available at https://app.dittonetwork.io/operators tracks the operator performance. Based on this data Ditto will determine and distribute points to the most performing operators at the end of the Alpha phase.
     
 - Fairness & Validity:
 Only valid simulations are counted (no duplicates, no broken reports).
@@ -37,8 +37,8 @@ The setup process is simplified using the provided `Makefile`.
 ### 1. Whitelisting for Reporting
 
 Before running the node, each operator has to be whitelisted. Please join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide your simulator and operator addresses in the following [google form](https://forms.gle/iQcGKtY7wq66Dnxg6). 
-- Simulator address: This is the public key of the EOA the operator will use to sign reports. Please generate a new key for this purpose and do not use your real operator key during the Alpha phase.
-- Operator address: This is the address that holds the delegated stake on Symbiotic. Only the public key should be shared.
+- Simulator address: This is the public address of the EOA the operator will use to sign reports. Please generate a new key for this purpose and do not use your real operator key during the Alpha phase.
+- Operator address: This is the address that holds the delegated stake on Symbiotic.
 
 This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
 
