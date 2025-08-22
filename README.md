@@ -2,6 +2,19 @@
 
 This repository contains the backend services for the Ditto Network, including the Simulator and the Indexer. It uses Docker and Docker Compose to orchestrate the services, making setup and development straightforward.
 
+# Operator Incentives & Rules
+
+During the Alpha phase, operators will be rewarded based on their performance in simulations. Points are distributed retrospectively and will become visible after the Alpha phase concludes.
+
+- Reward Mechanism:
+A public leaderboard available at https://app.dittonetwork.io/operators tracks the operator performance. Based on this data Ditto will determine and distribute points to the most performing operators at the end of the Alpha phase.
+    
+- Fairness & Validity:
+Only valid simulations are counted (no duplicates, no broken reports).
+    
+- Stake Equivalence:
+Rewards are designed to simulate staking value and add additional incentives exclusively for node operators.
+
 ## Architecture
 
 The project consists of two main services, orchestrated by `docker-compose.yml`:
@@ -26,12 +39,15 @@ Before you begin, ensure you have the following installed on your system:
 -   [Make](https://www.gnu.org/software/make/) (optional, but recommended for using the provided commands)
 
 ## Getting Started
-
 The setup process is simplified using the provided `Makefile`.
 
 ### 1. Whitelisting for Reporting
 
-Before running the node, the operator must join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide their simulator and operator address. Simulator address is the public key of the EOA that operator will use to sign the reports, the operator address is the address that has the delegated stake on symbiotic. This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
+Before running the node, each operator has to be whitelisted. Please join the [Telegram group](https://t.me/+_zH57wUkqsIzYmYy) and provide your simulator and operator addresses in the following [google form](https://forms.gle/iQcGKtY7wq66Dnxg6). 
+- Simulator address: This is the public address of the EOA the operator will use to sign reports. Please generate a new key for this purpose and do not use your real operator key during the Alpha phase.
+- Operator address: This is the address that holds the delegated stake on Symbiotic.
+
+This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
 
 ### 2. Configure Environment Variables
 
