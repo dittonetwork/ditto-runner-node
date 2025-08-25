@@ -1,0 +1,41 @@
+name: Deploy ditto runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        type: environment
+
+jobs:
+  deploy-runner:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      ENV_FILE: ${{ secrets.ENV_FILE }}
+      USER: runner
+      HOST: ${{ vars.RUNNER_HOST }}
+      PROJECT_PATH: /home/runner/ditto-runner-node
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Adding Known Hosts
+      run: mkdir -p ~/.ssh/ && ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+    - name: Install SSH Key
+      run: install -m 600 -D /dev/null ~/.ssh/id_rsa && echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+    - name: Generate env for project
+      run: echo "$ENV_FILE" > .env
+    - name: Upload code to server
+      run: |
+        rsync -az --delete --exclude=".git" --exclude=".github" ./ ${USER}@${HOST}:${PROJECT_PATH}/
+    - name: Rebuild and restart containers on server
+      run: |
+        ssh ${USER}@${HOST} <<EOF
+          cd ${PROJECT_PATH}
+          docker compose pull || true
+          docker compose build
+          docker compose down
+          docker compose up -d
+        EOF
