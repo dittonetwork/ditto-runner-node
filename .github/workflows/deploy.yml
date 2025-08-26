@@ -14,9 +14,9 @@ jobs:
     environment: ${{ inputs.environment }}
     env:
       ENV_FILE: ${{ secrets.ENV_FILE }}
-      USER: runner
-      HOST: ${{ vars.RUNNER_HOST }}
-      PROJECT_PATH: /home/runner/ditto-runner-node
+      USER: ${{ secrets.USER }}      
+      HOST: ${{ secrets.RUNNER_HOST }}
+      PROJECT_PATH: ${{ secrets.PROJECT_PATH }}      
     steps:
     - uses: actions/checkout@v2
       with:
