@@ -94,11 +94,8 @@ make up
 If you don't have `make`, you can run the steps manually:
 
 ```bash
-# 1. Initialize and update the git submodules
-git submodule update --init --recursive
-
 # 2. Build and start the docker containers
-docker-compose up -d --build
+docker compose up -d
 ```
 
 ## Configuration
@@ -162,7 +159,3 @@ Here are some common issues and how to resolve them:
 -   **`mongo-init` service fails:**
     -   The `mongo-init` service is responsible for initializing the MongoDB replica set. It can sometimes fail due to timing issues.
     -   **Solution:** Running `make down && make up` usually resolves this.
-
--   **Submodule-related errors:**
-    -   If you see errors about missing files or directories within the `simulator` or `indexer` directories, it's likely the submodules were not initialized correctly.
-    -   **Solution:** Run `git submodule update --init --recursive` manually to ensure the submodules are cloned and up to date. 

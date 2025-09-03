@@ -1,7 +1,6 @@
 services:
   simulator:
-    build:
-      context: ./simulator
+    image: ghcr.io/dittonetwork/simulator:0.0.1
     networks:
       - ditto_network
     depends_on:
@@ -24,8 +23,7 @@ services:
       - EXECUTOR_ADDRESS=0xF177179963aA0EDE80Be4396d04d970171CF6a36
 
   indexer:
-    build:
-      context: ./indexer
+    image: ghcr.io/dittonetwork/indexer:0.0.1
     networks:
       - ditto_network
     depends_on:
@@ -40,7 +38,7 @@ services:
       - ENV=prod
 
   mongo:
-    image: mongo:latest
+    image: mongo:8.0.13
     command: mongod --replSet rs0 --bind_ip_all
     networks:
       - ditto_network
@@ -48,7 +46,7 @@ services:
       - mongo-data:/data/db
 
   mongo-init:
-    image: mongo:latest
+    image: mongo:8.0.13
     restart: "no"
     depends_on:
       - mongo
