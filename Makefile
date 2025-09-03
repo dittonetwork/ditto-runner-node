@@ -1,13 +1,10 @@
-.PHONY: setup up down logs
+.PHONY: up down logs
 
-setup:
-	git submodule update --init --recursive
-
-up: setup
-	docker-compose up -d --build
+up:
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
 
 logs:
-	docker-compose logs -f 
+	docker compose logs -f 
