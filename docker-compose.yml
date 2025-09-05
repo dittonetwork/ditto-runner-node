@@ -10,8 +10,8 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/?replicaSet=rs0
       - DB_NAME=indexer
-      - MAX_WORKERS=1
-      - RUNNER_NODE_SLEEP=60
+      - MAX_WORKERS=4
+      - RUNNER_NODE_SLEEP=5
       - FULL_NODE=false
       - MAX_MISSING_NEXT_SIM_LIMIT=100
       - MAX_BLOCK_RANGE_11155111=10000
