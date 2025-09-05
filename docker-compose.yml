@@ -1,6 +1,6 @@
 services:
   simulator:
-    image: ghcr.io/dittonetwork/simulator:0.0.1
+    image: ghcr.io/dittonetwork/simulator:0.0.2
     networks:
       - ditto_network
     depends_on:
