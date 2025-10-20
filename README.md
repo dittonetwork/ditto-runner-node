@@ -1,26 +1,27 @@
 # Ditto Runner Node
 
-This repository contains the backend services for the Ditto Network, including the Simulator and the Indexer. It uses Docker and Docker Compose to orchestrate the services, making setup and development straightforward.
+This repository contains the Ditto Runner Node stack, including the Simulator (AVS Web API), the Indexer, and the Othentic Attester Node. It uses Docker and Docker Compose to orchestrate the services, making setup and development straightforward.
 
 # Operator Incentives & Rules
 
 During the Alpha phase, operators will be rewarded based on their performance in simulations. Points are distributed retrospectively and will become visible after the Alpha phase concludes.
 
 - Reward Mechanism:
-A public leaderboard available at https://app.dittonetwork.io/operators tracks the operator performance. Based on this data Ditto will determine and distribute points to the most performing operators at the end of the Alpha phase.
+A public leaderboard, available at https://app.dittonetwork.io/operators, tracks operator performance. Based on this data, Ditto will determine and distribute points to the top-performing operators at the end of the Alpha phase.
     
 - Fairness & Validity:
 Only valid simulations are counted (no duplicates, no broken reports).
     
 - Stake Equivalence:
-Rewards are designed to simulate staking value and add additional incentives exclusively for node operators.
+Rewards are designed to simulate staking value and provide additional incentives exclusively for node operators.
 
 ## Architecture
 
-The project consists of two main services, orchestrated by `docker-compose.yml`:
+The project consists of three main services, orchestrated by `docker-compose.yml`:
 
--   **`simulator`**: Responsible for executing and simulating Ditto workflows. It interacts with an Ethereum-compatible blockchain and IPFS for data storage.
+-   **`simulator`**: Ditto AVS Web API responsible for executing and simulating Ditto workflows. It interacts with EVM chains and IPFS for data storage.
 -   **`indexer`**: Indexes data from the blockchain to provide a queryable API for the frontend and other services.
+-   **`othnode` (Othentic Attester)**: Runs the Othentic attester node and connects to the Ditto aggregator over P2P. It uses your operator key to sign attestations and communicates with the `simulator` via HTTP.
 
 ## Prerequisites
 ### Hardware 
@@ -49,7 +50,17 @@ Before running the node, each operator has to be whitelisted. Please join the [T
 
 This step is necessary to enable operations and reporting. Failure to complete this step will prevent the node from functioning properly in the live environment.
 
-### 2. Configure Environment Variables
+### 2. Othentic Operator Setup
+
+Follow the official guide:
+
+- Install `otcli`: https://docs.othentic.xyz/main/welcome/getting-started/install-othentic-cli
+- Register as an operator: https://docs.othentic.xyz/main/user-guide/operator-management/use-smart-account
+- Note: Use the consensus private key that you used when registering in the Simulator app.
+
+See also: [Othentic docs – Operator Management](https://docs.othentic.xyz/main/user-guide/operator-management)
+
+### 3. Configure Environment Variables
 
 This project uses a `.env` file to manage sensitive and environment-specific variables. You must create this file in the root of the project.
 
@@ -57,8 +68,7 @@ Create a file named `.env` and add the following critical variables. These are *
 
 ```
 EXECUTOR_PRIVATE_KEY=...
-# Sepolia
-RPC_URL_11155111=...
+
 # Base
 RPC_URL_8453=...
 # Arbitrum
@@ -67,14 +77,8 @@ RPC_URL_42161=...
 RPC_URL_1=...
 # Polygon
 RPC_URL_137=...
-# Optimism
-RPC_URL_10=...
-ZERODEV_API_KEY=...
-```
 
--   `EXECUTOR_PRIVATE_KEY`: The private key of the wallet that will execute transactions.
--   `RPC_URL_<CHAIN_ID>`: RPC endpoints for the supported blockchains.
--   `ZERODEV_API_KEY`: Your API key from [ZeroDev](https://dashboard.zerodev.app), used for UserOperation simulations and executions.
+```
 
 ### 3. Clone the Repository
 
@@ -135,6 +139,10 @@ This service listens for on-chain events and indexes them for fast querying.
 | `IPFS_CONNECTOR_ENDPOINT` | **Required.** The IPFS endpoint used to fetch metadata for indexed items. |
 | `RPC_URL_<CHAIN_ID>` | **Required.** RPC endpoints for the supported blockchains, used for fetching on-chain data. Set this in your `.env` file. |
 
+### `othnode` (Othentic Attester) Service
+
+Runs the Othentic attester (`otnode`) and connects to the Ditto aggregator over P2P. It uses your operator key and reads the chain context from environment variables. It communicates with the `simulator` via the internal Compose network.
+
 ## Usage
 
 The `Makefile` provides convenient commands for managing the application stack:
@@ -142,6 +150,24 @@ The `Makefile` provides convenient commands for managing the application stack:
 -   `make up`: Starts all services. It also runs the initial setup on the first run.
 -   `make down`: Stops and removes all running containers.
 -   `make logs`: Tails the logs from all running services. Use `Ctrl+C` to exit.
+
+### Using Othentic tools inside the container
+
+Open a shell in the `othnode` container:
+
+```bash
+docker compose exec othnode sh
+```
+
+Examples:
+
+```bash
+# Get node ID
+otnode get-id
+
+# Explore operator CLI
+otcli operator --help
+```
 
 ## Troubleshooting
 
@@ -159,3 +185,8 @@ Here are some common issues and how to resolve them:
 -   **`mongo-init` service fails:**
     -   The `mongo-init` service is responsible for initializing the MongoDB replica set. It can sometimes fail due to timing issues.
     -   **Solution:** Running `make down && make up` usually resolves this.
+
+-   **`othnode` cannot connect to aggregator (P2P issues):**
+    -   Verify `OTHENTIC_BOOTSTRAP_ID` is correct and port `9876` is open.
+    -   Ensure the `simulator` is healthy; the attester depends on the AVS Web API.
+    -   Check that `L1_CHAIN` and `L2_CHAIN` match your intended networks.

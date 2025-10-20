@@ -1,6 +1,6 @@
 services:
   simulator:
-    image: ghcr.io/dittonetwork/simulator:0.0.2
+    image: ghcr.io/dittonetwork/simulator:0.0.4
     networks:
       - ditto_network
     depends_on:
@@ -19,11 +19,45 @@ services:
       - IPFS_SERVICE_URL=https://ipfs-service.dittonetwork.io
       - IS_PROD=true
       - LOG_LEVEL=info
-      - LOG_PRETTY=true 
+      - LOG_PRETTY=true
+      - API_ONLY=true
       - EXECUTOR_ADDRESS=0xF177179963aA0EDE80Be4396d04d970171CF6a36
 
+  othnode:
+    build:
+      context: .
+      dockerfile: Dockerfile.othnode
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - ditto_network
+    command: [
+      "run",
+      "attester",
+      "/dns4/aggregator.dittonetwork.io/tcp/9876/p2p/${OTHENTIC_BOOTSTRAP_ID}",
+      "--avs-webapi",
+      "simulator",
+      "--avs-webapi-port",
+      "8080",
+      "--p2p.port",
+      "9876",
+    ]
+    ports:
+      - "9876:9876"
+    environment:
+      - PRIVATE_KEY=${EXECUTOR_PRIVATE_KEY}
+      - L1_CHAIN=mainnet
+      - L2_CHAIN=mainnet-l2,polygon,base,arbitrum-one
+      - OTHENTIC_BOOTSTRAP_ID=12D3KooWDq8na78bZGZGcVeNZqXRKm6rASCy2L3rerYBQD8yrA1J
+      - AVS_GOVERNANCE_ADDRESS=0x4a49d2E53B33a4D50024B99B4fA159041367E55D
+      - ATTESTATION_CENTER_ADDRESS="1@0x9969F9eBD5210679d0b33d4e820283583a1caFA8,137@0x4Ee221703be5554Af803B469C678Bbd02797bb82,8453@0xf145D2527b74ADdc6A58C4e5A66C5cC249e8fE72,42161@0x0DcC81038Ab43EFe74f7869c04B9C93983501C88"
+    depends_on:
+      simulator:
+        condition: service_started
+
   indexer:
-    image: ghcr.io/dittonetwork/indexer:0.0.1
+    image: ghcr.io/dittonetwork/indexer:0.0.2
     networks:
       - ditto_network
     depends_on:
