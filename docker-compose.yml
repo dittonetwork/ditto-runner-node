@@ -35,7 +35,7 @@ services:
     command: [
       "run",
       "attester",
-      "/dns4/aggregator.dittonetwork.io/tcp/9876/p2p/${OTHENTIC_BOOTSTRAP_ID}",
+      "/dns4/aggregator.dittonetwork.io/tcp/9876/p2p/12D3KooWDq8na78bZGZGcVeNZqXRKm6rASCy2L3rerYBQD8yrA1J",
       "--avs-webapi",
       "simulator",
       "--avs-webapi-port",
@@ -51,13 +51,15 @@ services:
       - L2_CHAIN=mainnet-l2,polygon,base,arbitrum-one
       - OTHENTIC_BOOTSTRAP_ID=12D3KooWDq8na78bZGZGcVeNZqXRKm6rASCy2L3rerYBQD8yrA1J
       - AVS_GOVERNANCE_ADDRESS=0x4a49d2E53B33a4D50024B99B4fA159041367E55D
-      - ATTESTATION_CENTER_ADDRESS="1@0x9969F9eBD5210679d0b33d4e820283583a1caFA8,137@0x4Ee221703be5554Af803B469C678Bbd02797bb82,8453@0xf145D2527b74ADdc6A58C4e5A66C5cC249e8fE72,42161@0x0DcC81038Ab43EFe74f7869c04B9C93983501C88"
+      - ATTESTATION_CENTER_ADDRESS=1@0x9969F9eBD5210679d0b33d4e820283583a1caFA8,137@0x4Ee221703be5554Af803B469C678Bbd02797bb82,8453@0xf145D2527b74ADdc6A58C4e5A66C5cC249e8fE72,42161@0x0DcC81038Ab43EFe74f7869c04B9C93983501C88
+      - L1_RPC=${RPC_URL_1}
+      - L2_RPC=1@${RPC_URL_1},137@${RPC_URL_137},8453@${RPC_URL_8453},42161@${RPC_URL_42161}
     depends_on:
       simulator:
         condition: service_started
 
   indexer:
-    image: ghcr.io/dittonetwork/indexer:0.0.2
+    image: ghcr.io/dittonetwork/indexer:0.0.3
     networks:
       - ditto_network
     depends_on:
