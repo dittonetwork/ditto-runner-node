@@ -1,6 +1,6 @@
 services:
   simulator:
-    image: ghcr.io/dittonetwork/simulator:0.0.4
+    image: ghcr.io/dittonetwork/simulator:0.0.5
     networks:
       - ditto_network
     depends_on:
@@ -37,7 +37,7 @@ services:
       "attester",
       "/dns4/aggregator.dittonetwork.io/tcp/9876/p2p/12D3KooWDq8na78bZGZGcVeNZqXRKm6rASCy2L3rerYBQD8yrA1J",
       "--avs-webapi",
-      "simulator",
+      "http://simulator",
       "--avs-webapi-port",
       "8080",
       "--p2p.port",
