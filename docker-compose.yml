@@ -1,6 +1,6 @@
 services:
   simulator:
-    image: ghcr.io/dittonetwork/simulator:0.0.6
+    image: ghcr.io/dittonetwork/simulator:0.0.7
     networks:
       - ditto_network
     depends_on:
@@ -59,7 +59,7 @@ services:
         condition: service_started
 
   indexer:
-    image: ghcr.io/dittonetwork/indexer:0.0.3
+    image: ghcr.io/dittonetwork/indexer:0.0.4
     networks:
       - ditto_network
     depends_on:
