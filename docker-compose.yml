@@ -20,7 +20,7 @@ services:
       - IS_PROD=true
       - LOG_LEVEL=info
       - LOG_PRETTY=true
-      - API_ONLY=true
+      - API_ONLY=false
       - EXECUTOR_ADDRESS=0xF177179963aA0EDE80Be4396d04d970171CF6a36
 
   othnode:
