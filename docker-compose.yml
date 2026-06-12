@@ -1,6 +1,7 @@
 services:
   simulator:
     image: ghcr.io/dittonetwork/simulator:0.0.7
+    restart: unless-stopped
     networks:
       - ditto_network
     depends_on:
@@ -60,6 +61,7 @@ services:
 
   indexer:
     image: ghcr.io/dittonetwork/indexer:0.0.4
+    restart: unless-stopped
     networks:
       - ditto_network
     depends_on:
@@ -75,6 +77,7 @@ services:
 
   mongo:
     image: mongo:8.0.13
+    restart: unless-stopped
     command: mongod --replSet rs0 --bind_ip_all
     networks:
       - ditto_network
