@@ -102,6 +102,19 @@ If you don't have `make`, you can run the steps manually:
 docker compose up -d
 ```
 
+## Host Reliability
+
+All long-running services declare a Docker restart policy, so they come back after a container crash or host reboot. Two host-level settings are still required for that to work end-to-end:
+
+- Start Docker on boot: `sudo systemctl enable docker`
+- Cap container log size — Docker logs can fill the disk and silently kill the node. In `/etc/docker/daemon.json`:
+
+  ```json
+  { "log-driver": "json-file", "log-opts": { "max-size": "100m", "max-file": "3" } }
+  ```
+
+  then `sudo systemctl restart docker` (recreate containers with `docker compose up -d` for it to apply).
+
 ## Configuration
 
 The services are configured via environment variables. Critical secrets are loaded from the `.env` file, while other service-specific configurations are set directly in `docker-compose.yml`.
